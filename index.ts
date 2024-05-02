@@ -21,7 +21,7 @@ app.post("/completions", async (req: Request, res: Response ) => {
             messages: [
                 {
                     role: "user",
-                    content: req.body.content
+                    content: "Give me a " + req.body.duration + " minute workout for training my " + req.body.content
                 }
                 ]
         });
