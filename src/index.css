@@ -33,7 +33,7 @@ p, input {
     height: 46%;
     border-radius: 10px;
     background-color: rgb(234, 234, 234);
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {

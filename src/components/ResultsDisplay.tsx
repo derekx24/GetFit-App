@@ -1,10 +1,14 @@
 import React from "react";
 
-const ResultsDisplay = () =>  {
+interface CodeDisplayProps {
+    text: string
+}
+
+const ResultsDisplay = ({text} : CodeDisplayProps) =>  {
     return (
         <div className="results-display">
             <div className="result-output">
-                <p></p>
+                <p>{text}</p>
             </div>
         </div>
     )

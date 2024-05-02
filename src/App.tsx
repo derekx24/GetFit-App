@@ -26,10 +26,9 @@ const App = () =>  {
 
             const response = await fetch("http://localhost:8000/completions", options);
             const data = await response.json();
-            console.log(data);
             const userMessage = {
                 role: "user",
-                content: "Give me a " + durationValue + " minute workout for training my " + exerciseValue
+                content: durationValue + " min " + exerciseValue
             }
             setChat(oldChat => [...oldChat, data, userMessage])
         } catch (error) {
@@ -37,22 +36,30 @@ const App = () =>  {
         }
     }
 
-    console.log(chat)
+    const clearChat = () => {
+        setEValue("");
+        setDValue("");
+        setChat([]);
+    }
+
+    const filteredUserMessages = chat.filter(message => message.role === "user");
+    const latestResult = chat.filter(message => message.role === "assistant").pop();
+
 
   return (
     <div className="app">
-        <MessagesDisplay/>
+        <MessagesDisplay userMessages={filteredUserMessages}/>
         <div className="inputs">
             <p className="title">What would you like a workout for?</p>
             <input value={exerciseValue} onChange={e => setEValue(e.target.value)}/>
             <p className="title">Duration (min) :</p>
             <input value={durationValue} onChange={e => setDValue(e.target.value)}/>
         </div>
-        <ResultsDisplay/>
+        <ResultsDisplay text={latestResult?.content || ""}/>
 
       <div className = "button-container">
         <button id = "get-results" onClick={getQuery}>Lets Go!</button>
-        <button id = "clear-chat">Clear Chat</button>
+        <button id = "clear-chat" onClick={clearChat}>Clear Chat</button>
       </div>
     </div>
   )
